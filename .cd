@@ -1,5 +1,5 @@
 #!/bin/bash
-title audio.leonk.dev
+title waves.leonk.dev
 debug audio file dump
 
 help .cd | indent
@@ -57,4 +57,10 @@ function insert() {
   else
     cp $1 audio/
   fi
+}
+
+# add audio to source
+function build() {
+  # import in html
+  # map in js
 }
