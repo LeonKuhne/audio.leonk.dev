@@ -7,11 +7,20 @@ const shelf = {
       "leave my girlfriend": "./audio/albums/get real headphones/leave my girlfriend.mp3",
       "take my nightmares": "./audio/albums/get real headphones/take my nightmares.mp3",
     },
+    "hell": "./audio/albums/hell.mp3",
   },
-  "unsorted": {
-    "bad request v3": "./audio/unsorted/bad request v3.mp3",
-    "method a": "./audio/unsorted/method a.mp3",
-    "tree": "./audio/unsorted/tree.mp3",
+  "fun": {
+    "bad request v3": "./audio/fun/bad request v3.mp3",
+    "future": "./audio/fun/future.mp3",
+    "garage": "./audio/fun/garage.mp3",
+    "method a": "./audio/fun/method a.mp3",
+    "percs": "./audio/fun/percs.mp3",
+    "ramadan": "./audio/fun/ramadan.mp3",
+  },
+  "stems": {
+    "drown": "./audio/stems/drown.mp3",
+    "trap": "./audio/stems/trap.mp3",
+    "tree": "./audio/stems/tree.mp3",
   },
 }
 
