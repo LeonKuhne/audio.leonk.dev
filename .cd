@@ -59,15 +59,47 @@ function insert() {
   fi
 }
 
+# $1 directory/file
+# $2 indent
+# $3 ignore first
+function compile() {
+  if [ -z "$1" ]; then
+    err "usage: compile <directory> [indent] [ignore first]"
+    return
+  fi
+  if [ ! -z "$3" ]; then
+    for file in $1/*; do
+      compile $file "$2"
+    done
+  # process non-empty directory
+  elif [[ -d $1 ]] && ([ "$(ls -A $1)" ]); then
+    echo "$2\"$(basename $1)\": {"
+    for file in $1/*; do
+      compile $file "$2  "
+    done
+    echo "$2},"
+  # process file
+  else
+    if [[ $1 == *.mp3 ]]; then
+      echo "$2\"$(basename ${1%.*})\": \"$1\","
+    fi
+  fi
+}
+
 # add audio to source
 function build() {
-  files=""
-  for file in audio/*; do
-    files="$files    \"$file\"\n"
-  done
-  files="${files%'\n'}" 
+  files=$(compile ./audio "  " true)
+  # prevent unescaped newline inside substitute pattern
+  files=$(echo -e $files | sed 's/\//\\\//g')
   # [autofill ./audio]
+  substitution=$(
+    echo -n 's#/(// \[autofill \./audio\]).*'
+    echo -n "#\1 add '/' to rebuild\n"
+    echo -n "$files#g"
+  )
   cat src/script.js \
-    | sed "s#.*// \[autofill ./audio\].*#$files#g"
-    > src/script.js 
+    | perl -pe "$substitution" \
+    > src/script.js.tmp
+  mv src/script.js.tmp src/script.js
+  info "source updated"
 }

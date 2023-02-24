@@ -6,14 +6,40 @@
 :root {
   --bg: black;
   --fg: red;
+  --alt: blue;
+  --alt2: green;
 }
 
 html {
   background: var(--bg);
   color: var(--fg);
+  text-align: right;
 }
 
 * {
   font-family: text;
   text-transform: uppercase;
+  cursor: default;
+}
+
+.group, .record {
+  margin-right: 2rem;
+}
+
+.record :hover {
+  color: var(--alt);
+  cursor: pointer;
+}
+
+.active, .active :hover{
+  color: var(--alt2) !important;
+}
+
+#damage {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 0%;
+  width: 0.5rem;
+  background: var(--fg);
 }
