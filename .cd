@@ -1,0 +1,9 @@
+#!/bin/bash
+title audio.leonk.dev
+debug audio file dump
+
+
+function collectAudio() {
+  # scan your computer for audio and dump it in a bin
+  cp ~/Desktop/*.mp3 audio/
+}

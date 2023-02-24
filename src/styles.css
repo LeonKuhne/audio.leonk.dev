@@ -1,0 +1,9 @@
+:root {
+  --bg: black;
+  --fg: red;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+}
