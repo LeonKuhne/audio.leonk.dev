@@ -15,39 +15,39 @@ const shelf = {
   },
 }
 
-const audio = new Audio()
+var model = {}
 
-const rampVolume = (tickVolume, audio, volume, onDone=()=>{}, delay=10) => {
-  if (tickVolume(audio.volume, volume)) {
-    audio.volume = volume
+const rampVolume = (tickVolume, volume, onDone=()=>{}, delay=10) => {
+  if (tickVolume(model.audio.volume, volume)) {
+    model.audio.volume = volume
     onDone()
     return
   }
   setTimeout(() => {
-    rampVolume(tickVolume, audio, volume, onDone, delay)
+    rampVolume(tickVolume, volume, onDone, delay)
   }, delay)
 }
 
-const rampUpVolume = (audio, volume, onDone=()=>{}, step=0.05) => {
+const rampUpVolume = (volume, onDone=()=>{}, step=0.05) => {
   rampVolume((current, target) => {
-    let vol = audio.volume + step
+    let vol = model.audio.volume + step
     vol = vol > 1 ? 1 : vol
-    audio.volume = vol
+    model.audio.volume = vol
     return current >= target
-  }, audio, volume, onDone)
+  }, volume, onDone)
 }
-const rampDownVolume = (audio, volume, onDone=()=>{}, step=0.05) => {
+const rampDownVolume = (volume, onDone=()=>{}, step=0.05) => {
   rampVolume((current, target) => {
-    let vol = audio.volume - step
+    let vol = model.audio.volume - step
     vol = vol < 0 ? 0 : vol
-    audio.volume = vol
+    model.audio.volume = vol
     return current <= target
-  }, audio, volume, onDone)
+  }, volume, onDone)
 }
 
-const setActiveRecord = (recordElem) => {
+const setActiveRecord = (elem) => {
   resetActiveRecord()
-  recordElem.classList.add('active')
+  elem.classList.add('active')
 }
 
 const resetActiveRecord = () => {
@@ -57,40 +57,47 @@ const resetActiveRecord = () => {
   }
 }
 
-const play = (name) => {
-  setActiveRecord(recordElem)
-  audio.currentTime = 0
-  audio.altText = name
-  audio.src = record
-  audio.play()
-  rampUpVolume(audio, 1)
+const trackProgress = (delay=10) => {
+  if (model.audio.paused) { return }
+  const progress = model.audio.currentTime / model.audio.duration
+  model.progress.style.height = `${progress * 100}%`
+  setTimeout(() => trackProgress(delay), delay)
+}
+
+const play = (name, record, elem) => {
+  setActiveRecord(elem)
+  model.audio.currentTime = 0
+  model.audio.altText = name
+  model.audio.src = record
+  model.volume = 0
+  model.audio.play()
+  rampUpVolume(1)
+  trackProgress()
 }
 
 const pause = () => {
   resetActiveRecord()
-  rampDownVolume(audio, 0, () => {
-    audio.pause()
-  })
+  rampDownVolume(0, () => model.audio.pause())
 }
 
-const addRecord = (name, elem, record) => {
+const addRecord = (name, record, elem) => {
   const recordElem = document.createElement('div')
   recordElem.className = 'record'
   recordElem.innerHTML = `<h2>${name}</h2>`
   recordElem.addEventListener('click', () => {
     // pause record
-    if (audio.altText == name && !audio.paused) {
+    if (model.audio.altText == name && !model.audio.paused) {
       pause()
     // play record
     } else {
-      play()
+      play(name, record, recordElem)
     }
   })
   // render record
   elem.appendChild(recordElem)
 }
 
-const addGroup = (name, elem, group) => {
+const addGroup = (name, group, elem) => {
   // add group
   const groupElem = document.createElement('div')
   groupElem.className = 'group'
@@ -99,9 +106,9 @@ const addGroup = (name, elem, group) => {
   // add more groups and records
   for (let [name, childGroup] of Object.entries(group)) {
     if (typeof childGroup === 'string') {
-      addRecord(name, groupElem, childGroup)
+      addRecord(name, childGroup, groupElem)
     } else {
-      addGroup(name, groupElem, childGroup)
+      addGroup(name, childGroup, groupElem)
     }
   }
 }
@@ -109,6 +116,11 @@ const addGroup = (name, elem, group) => {
 
 // start
 window.onload = () => {
+  model = {
+    audio: new Audio(volume=0),
+    progress: document.getElementById('progress'),
+    waves: document.getElementById('waves'),
+  }
   // display records from shelf
-  addGroup("waves", document.getElementById('waves'), shelf)
+  addGroup("waves", shelf, model.waves)
 }

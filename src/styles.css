@@ -35,7 +35,7 @@ html {
   color: var(--alt2) !important;
 }
 
-#damage {
+#progress {
   position: absolute;
   right: 0;
   top: 0;
