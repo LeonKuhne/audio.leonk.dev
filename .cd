@@ -61,6 +61,7 @@ function insert() {
 
 # add audio to source
 function build() {
-  # import in html
-  # map in js
+  # replace text in '// [autofill ./audio]' in src/script.js
+  sed -i '' '/\/\/ \[autofill \/audio\]/d' src/script.js
+  # with list of audio files
 }
