@@ -2,8 +2,59 @@
 title audio.leonk.dev
 debug audio file dump
 
+help .cd | indent
 
-function collectAudio() {
-  # scan your computer for audio and dump it in a bin
-  cp ~/Desktop/*.mp3 audio/
+function load() {
+  collect
+  bin
+}
+
+# scan computer for audio and dump it in a bin
+function collect() {
+  if [ ! -d bin ]; then mkdir bin; fi
+  cp ~/Desktop/*.mp3 bin/
+  cp ~/Desktop/*.wav bin/
+  info "bin filled"
+}
+
+# sort through bin and empty it
+function bin() {
+  # provide options
+  idx=0
+  for file in bin/*; do
+    debug "$idx $(basename $file)"
+    idx=$((idx+1))
+    if [ $idx -gt 9 ]; then break; fi
+  done
+  # request input
+  notice -n "select:" && echo " "
+  read selected
+  # move selected
+  idx=0
+  for file in bin/*; do
+    if [[ $selected = *$idx* ]]; then
+      warn "moving $idx $(basename $file)"
+      insert $file
+    fi
+    rm $file
+    idx=$((idx+1))
+    if [ $idx -gt 9 ]; then break; fi
+  done
+  # delete or repeat
+  if [ -z "$(ls bin)" ]; then
+    rmdir bin
+    info "bin emptied"
+  else bin; fi
+}
+
+# insert audio
+function insert() {
+  # check if extension is wav
+  if [[ $1 == *.wav ]]; then
+    # convert to mp3
+    filename=$(basename ${1%.*})
+    ffmpeg -i $1 -acodec libmp3lame -ab 128k audio/$filename.mp3
+  else
+    cp $1 audio/
+  fi
 }
