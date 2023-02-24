@@ -2,7 +2,7 @@ const play = () => {
   var audio = [
     // [autofill ./audio]
   ]
-  var audio = new Audio('audio/unsorted/tree.mp3');
+  //var audio = new Audio('audio/unsorted/tree.mp3');
   audio.play();
 }
 

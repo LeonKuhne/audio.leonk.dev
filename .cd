@@ -61,7 +61,13 @@ function insert() {
 
 # add audio to source
 function build() {
-  # replace text in '// [autofill ./audio]' in src/script.js
-  sed -i '' '/\/\/ \[autofill \/audio\]/d' src/script.js
-  # with list of audio files
+  files=""
+  for file in audio/*; do
+    files="$files    \"$file\"\n"
+  done
+  files="${files%'\n'}" 
+  # [autofill ./audio]
+  cat src/script.js \
+    | sed "s#.*// \[autofill ./audio\].*#$files#g"
+    > src/script.js 
 }
