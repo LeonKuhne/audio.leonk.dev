@@ -11,10 +11,18 @@ function load() {
 
 # scan computer for audio and dump it in a bin
 function collect() {
+  info "collecting audio files $C_WARN(may take a second)"
+  collected=0
   if [ ! -d bin ]; then mkdir bin; fi
-  cp ~/Desktop/*.mp3 bin/
-  cp ~/Desktop/*.wav bin/
-  info "bin filled"
+  # recursive find all files
+  find ~/Downloads ~/Desktop -type f \
+    \( -name "*.mp3" -o -name "*.wav" \) \
+    -print0 | while read -d $'\0' file
+  do
+    collected=$((collected+1))
+    cp $file bin/
+  done
+  info "bin filled ($collected)"
 }
 
 # sort through bin and empty it
