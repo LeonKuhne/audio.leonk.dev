@@ -5,9 +5,12 @@
 
 :root {
   --bg: black;
-  --fg: red;
-  --alt: blue;
-  --alt2: green;
+  --fg: #C21212;
+  --alt-fg: #D33;
+  --alt-bg: #300;
+  --alt2: #700;
+  --alt3: #666;
+  --alt4: #333;
 }
 
 html {
@@ -15,6 +18,8 @@ html {
   color: var(--fg);
   text-align: right;
 }
+
+body { margin: 0; }
 
 * {
   font-family: text;
@@ -24,22 +29,55 @@ html {
 
 .group, .record {
   margin-right: 2rem;
+  user-select: none;
 }
 
-.record :hover {
-  color: var(--alt);
+.group {
+  color: var(--alt3);
+}
+
+.record {
+  color: var(--fg);
+}
+
+.record h2:hover, .group h1:hover {
   cursor: pointer;
+  color: var(--bg);
+  filter: drop-shadow(10px 10px 0 var(--alt-fg)) drop-shadow(-10px -10px 0 var(--alt-fg)) drop-shadow(10px -10px 0 var(--alt-fg)) drop-shadow(-10px 10px 0 var(--alt-fg));
 }
 
-.active, .active :hover{
+.active, .active :hover {
+  color: var(--bg);
+}
+
+.progress-box {
+  width: 100vw;
+  background: var(--alt2);
+  display: block;
+  position: absolute;
+  height: 4rem;
+  z-index: -1;
+  margin-top: -4.25rem;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: var(--fg);
+}
+
+.group.hidden {
+  color: var(--alt4);
+}
+
+.group.hidden h1:hover {
   color: var(--alt2) !important;
 }
 
-#progress {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 0%;
-  width: 0.75rem;
-  background: var(--fg);
+.group.hidden *:not(:first-child) {
+  display: none;
+}
+
+.group#hidden {
+  color: var(--bg);
 }
