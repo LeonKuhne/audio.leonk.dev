@@ -81,3 +81,7 @@ body { margin: 0; }
 .group#hidden {
   color: var(--bg);
 }
+
+.group#audio {
+  margin-right: 0;
+}
