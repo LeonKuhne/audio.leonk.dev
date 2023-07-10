@@ -1,5 +1,5 @@
 const shelf = {
-  // [autofill ./audio] add '/' to rebuild
+  /// [autofill ./audio] add '/' to rebuild
   "waves": {
     "get real headphones": {
       "buy me coffee": "./audio/waves/get real headphones/buy me coffee.mp3",
@@ -60,6 +60,14 @@ const shelf = {
     },
   },
   "lib": {
+    "bars": {
+      "Break": "./audio/lib/bars/Break.mp3",
+      "Dream": "./audio/lib/bars/Dream.mp3",
+      "Nascar": "./audio/lib/bars/Nascar.mp3",
+      "Table": "./audio/lib/bars/Table.mp3",
+      "Weary": "./audio/lib/bars/Weary.mp3",
+      "Windows": "./audio/lib/bars/Windows.mp3",
+    },
     "needs work": {
       "Bad Manners": "./audio/lib/needs work/Bad Manners.mp3",
       "a nice song": "./audio/lib/needs work/a nice song.mp3",
@@ -225,6 +233,11 @@ const addGroup = (name, group, elem) => {
   }
 }
 
+const expandAlbum = (folder, album) => {
+  document.getElementById(folder).classList.remove('hidden')
+  document.getElementById(album).classList.remove('hidden')
+}
+
 
 // start
 window.onload = () => {
@@ -236,8 +249,9 @@ window.onload = () => {
   // display records from shelf
   addGroup(null, shelf, model.waves)
   // show these
-  document.getElementById('waves').classList.remove('hidden')
-  document.getElementById('get real headphones').classList.remove('hidden')
+  expandAlbum('waves', 'get real headphones')
+  expandAlbum('waves', 'LA')
+  expandAlbum('lib', 'bars')
   // toggle groups
   for (let group of document.querySelectorAll('.group')) {
     if (group.firstChild.tagName !== 'H1') { continue }

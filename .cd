@@ -58,7 +58,7 @@ function bin() {
 # insert audio
 function insert() {
   # check if extension is wav
-  if [[ $1 == *.wav ]]; then
+  if [[ $1 != *.mp3 ]]; then
     # convert to mp3
     filename=$(basename ${1%.*})
     ffmpeg -i $1 -acodec libmp3lame -ab 128k audio/$filename.mp3
