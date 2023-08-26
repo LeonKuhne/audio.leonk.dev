@@ -1,3 +1,4 @@
+const exhibit = { lib: ['more'] }    
 const shelf = {
   /// [autofill ./audio] add '/' to rebuild
   "waves": {
@@ -60,7 +61,13 @@ const shelf = {
     },
   },
   "lib": {
-    "bars": {
+    "more": {
+      "afterthought": "./audio/lib/more/afterthought.mp3",
+      "anxiety": "./audio/lib/more/anxiety.mp3",
+      "god mode": "./audio/lib/more/god mode.mp3",
+      "house": "./audio/lib/more/house.mp3",
+      "noise": "./audio/lib/more/noise.mp3",
+    }, "bars": {
       "Break": "./audio/lib/bars/Break.mp3",
       "Dream": "./audio/lib/bars/Dream.mp3",
       "Nascar": "./audio/lib/bars/Nascar.mp3",
@@ -248,10 +255,12 @@ window.onload = () => {
   }
   // display records from shelf
   addGroup(null, shelf, model.waves)
-  // show these
-  expandAlbum('waves', 'get real headphones')
-  expandAlbum('waves', 'LA')
-  expandAlbum('lib', 'bars')
+  // expand selected
+  for (const [group, albums] of Object.entries(exhibit)) {
+    for (const album of albums) {
+      expandAlbum(group, album)
+    }
+  }
   // toggle groups
   for (let group of document.querySelectorAll('.group')) {
     if (group.firstChild.tagName !== 'H1') { continue }
