@@ -1,7 +1,13 @@
-const exhibit = { lib: ['more'] }    
+const exhibit = { waves: ['more'] }    
 const shelf = {
   /// [autofill ./audio] add '/' to rebuild
   "waves": {
+    "more": {
+      "noise": "./audio/waves/more/noise.mp3",
+      "house": "./audio/waves/more/house.mp3",
+      "anxiety": "./audio/waves/more/anxiety.mp3",
+      "afterthought": "./audio/waves/more/afterthought.mp3",
+    },
     "get real headphones": {
       "buy me coffee": "./audio/waves/get real headphones/buy me coffee.mp3",
       "take my nightmares": "./audio/waves/get real headphones/take my nightmares.mp3",
@@ -61,13 +67,7 @@ const shelf = {
     },
   },
   "lib": {
-    "more": {
-      "noise": "./audio/lib/more/noise.mp3",
-      "house": "./audio/lib/more/house.mp3",
-      "anxiety": "./audio/lib/more/anxiety.mp3",
-      "afterthought": "./audio/lib/more/afterthought.mp3",
-      "god mode": "./audio/lib/more/god mode.mp3",
-    }, "bars": {
+    "bars": {
       "Break": "./audio/lib/bars/Break.mp3",
       "Dream": "./audio/lib/bars/Dream.mp3",
       "Nascar": "./audio/lib/bars/Nascar.mp3",
@@ -76,6 +76,7 @@ const shelf = {
       "Windows": "./audio/lib/bars/Windows.mp3",
     },
     "needs work": {
+      "god mode": "./audio/lib/needs work/god mode.mp3",
       "Bad Manners": "./audio/lib/needs work/Bad Manners.mp3",
       "a nice song": "./audio/lib/needs work/a nice song.mp3",
       "future": "./audio/lib/needs work/future.mp3",
