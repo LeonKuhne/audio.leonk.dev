@@ -15,7 +15,7 @@ function collect() {
   collected=0
   if [ ! -d bin ]; then mkdir bin; fi
   # recursive find all files
-  find ~/Downloads ~/Desktop -type f \
+  find ~/Downloads ~/Desktop /mnt/c/Users/leonk/OneDrive/Desktop -type f \
     \( -name "*.mp3" -o -name "*.wav" \) \
     -print0 | while read -d $'\0' file
   do
@@ -28,29 +28,24 @@ function collect() {
 # sort through bin and empty it
 function bin() {
   # provide options
-  idx=0
-  for file in bin/*; do
-    debug "$idx $(basename $file)"
-    idx=$((idx+1))
-    if [ $idx -gt 9 ]; then break; fi
-  done
+  num_options=1
+  # get first file in bin
+  file="bin/$(ls --color=never bin | head -n 1)"
+  # play the option audio file
+  debug "Playing: $(basename $file)"
+  ffplay -nodisp -loglevel panic "$file"
   # request input
-  notice -n "select:" && echo " "
+  debug -n "approve (y/n):$C_RESET "
   read selected
-  # move selected
-  idx=0
-  for file in bin/*; do
-    if [[ $selected = *$idx* ]]; then
-      warn "moving $idx $(basename $file)"
-      insert $file
-    fi
-    rm $file
-    idx=$((idx+1))
-    if [ $idx -gt 9 ]; then break; fi
-  done
+  # move file if selected
+  if [ "$selected" = "y" ]; then
+    warn "moving $(basename $file)"
+    insert $file
+  fi
+  rm $file
   # delete or repeat
   if [ -z "$(ls bin)" ]; then
-    rmdir bin
+    rmdir "bin"
     info "bin emptied"
   else bin; fi
 }
