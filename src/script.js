@@ -62,11 +62,11 @@ const shelf = {
   },
   "lib": {
     "more": {
-      "afterthought": "./audio/lib/more/afterthought.mp3",
-      "anxiety": "./audio/lib/more/anxiety.mp3",
-      "god mode": "./audio/lib/more/god mode.mp3",
-      "house": "./audio/lib/more/house.mp3",
       "noise": "./audio/lib/more/noise.mp3",
+      "house": "./audio/lib/more/house.mp3",
+      "anxiety": "./audio/lib/more/anxiety.mp3",
+      "afterthought": "./audio/lib/more/afterthought.mp3",
+      "god mode": "./audio/lib/more/god mode.mp3",
     }, "bars": {
       "Break": "./audio/lib/bars/Break.mp3",
       "Dream": "./audio/lib/bars/Dream.mp3",
