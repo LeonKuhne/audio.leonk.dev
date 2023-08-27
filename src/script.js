@@ -3,6 +3,7 @@ const shelf = {
   /// [autofill ./audio] add '/' to rebuild
   "waves": {
     "more": {
+      "nitro": "./audio/waves/more/nitro.mp3",
       "noise": "./audio/waves/more/noise.mp3",
       "house": "./audio/waves/more/house.mp3",
       "anxiety": "./audio/waves/more/anxiety.mp3",
