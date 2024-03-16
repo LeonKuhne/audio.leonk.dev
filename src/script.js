@@ -1,14 +1,7 @@
-const exhibit = { waves: ['more'] }    
+const exhibit = { waves: ['get real headphones'] }    
 const shelf = {
   /// [autofill ./audio] add '/' to rebuild
   "waves": {
-    "more": {
-      "nitro": "./audio/waves/more/nitro.mp3",
-      "noise": "./audio/waves/more/noise.mp3",
-      "house": "./audio/waves/more/house.mp3",
-      "anxiety": "./audio/waves/more/anxiety.mp3",
-      "afterthought": "./audio/waves/more/afterthought.mp3",
-    },
     "get real headphones": {
       "buy me coffee": "./audio/waves/get real headphones/buy me coffee.mp3",
       "take my nightmares": "./audio/waves/get real headphones/take my nightmares.mp3",
@@ -68,6 +61,14 @@ const shelf = {
     },
   },
   "lib": {
+    "more": {
+      "ballerina": "./audio/lib/more/ballerina.mp3",
+      "nitro": "./audio/lib/more/nitro.mp3",
+      "noise": "./audio/lib/more/noise.mp3",
+      "house": "./audio/lib/more/house.mp3",
+      "anxiety": "./audio/lib/more/anxiety.mp3",
+      "afterthought": "./audio/lib/more/afterthought.mp3",
+    },
     "bars": {
       "Break": "./audio/lib/bars/Break.mp3",
       "Dream": "./audio/lib/bars/Dream.mp3",
