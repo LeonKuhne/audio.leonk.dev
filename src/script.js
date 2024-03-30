@@ -62,6 +62,7 @@ const shelf = {
   },
   "lib": {
     "more": {
+      "death": "./audio/lib/more/death.mp3",
       "ballerina": "./audio/lib/more/ballerina.mp3",
       "nitro": "./audio/lib/more/nitro.mp3",
       "noise": "./audio/lib/more/noise.mp3",
